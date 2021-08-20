@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudar a cor do SVG de acordo com o mes</title>
+
+    <style>
+
+        body {
+            margin: 20px;
+        }
+
+        .buttons a {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: black;
+            margin: 6px;
+        }
+
+        .circles {
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .circles .circle {
+            margin: 15px;
+            margin-left: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle span {
+            color: red;
+            position: absolute;
+            font-weight: bold;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        /* MUDAR A COR DO SVG PELO CSS COM A PROPRIEDADE (fill:). Exemplo de código abaixo! */
+        /* POR PADRÃO FOI DESATIVADO */
+
+        /* .circle svg {
+            fill: red;
+        } */
+
+    </style>
+
+</head>
+<body>
+    
+    <div class="buttons">
+
+        <a href="?janeiro">Janeiro</a>
+        <a href="?fevereiro">Fevereiro</a>
+        <a href="?marco">Março</a>
+        <a href="?abril">Abril</a>
+        <a href="?maio">Maio</a>
+        <a href="?junho">Junho</a>
+        <a href="?julho">Julho</a>
+        <a href="?agosto">Agosto</a>
+        <a href="?setembro">Setembro</a>
+        <a href="?outubro">Outubro</a>
+        <a href="?novembro">Novembro</a>
+        <a href="?dezembro">Dezembro</a>
+
+    </div>
+
+    <div class="circles">
+
+        <!-- OBSERVE QUE ESTOU USANDO O ATTRIBUTO data-order="1" no primeiro elemento e data-ordem="2" NO SEGUNDO ELEMENTO E ASSIM POR DIANTE -->
+        <!-- ESSE ATTRIBUTO data-ordem SERÁ USADO NO LADO DO JAVASCRIPT PARA PEGAR A ORDEM DO ELEMENTO E ALTERAR A COR DE ACORDO COM A CONFIGURAÇÃO -->
+        <div data-ordem="1" class="circle">
+            
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M61.438,0c33.93,0,61.441,27.512,61.441,61.441 c0,33.929-27.512,61.438-61.441,61.438C27.512,122.88,0,95.37,0,61.441C0,27.512,27.512,0,61.438,0L61.438,0z"/></g></svg>
+            
+            <span class="text-center">TEXTO 1</span>
+
+        </div>
+
+        <div data-ordem="2" class="circle">
+            
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M61.438,0c33.93,0,61.441,27.512,61.441,61.441 c0,33.929-27.512,61.438-61.441,61.438C27.512,122.88,0,95.37,0,61.441C0,27.512,27.512,0,61.438,0L61.438,0z"/></g></svg>
+            
+            <span class="text-center">TEXTO 2</span>
+
+        </div>
+
+        <div data-ordem="3" class="circle">
+            
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M61.438,0c33.93,0,61.441,27.512,61.441,61.441 c0,33.929-27.512,61.438-61.441,61.438C27.512,122.88,0,95.37,0,61.441C0,27.512,27.512,0,61.438,0L61.438,0z"/></g></svg>
+            
+            <span class="text-center">TEXTO 3</span>
+
+        </div>
+
+        <div data-ordem="4" class="circle">
+            
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M61.438,0c33.93,0,61.441,27.512,61.441,61.441 c0,33.929-27.512,61.438-61.441,61.438C27.512,122.88,0,95.37,0,61.441C0,27.512,27.512,0,61.438,0L61.438,0z"/></g></svg>
+            
+            <span class="text-center">TEXTO 4</span>
+
+        </div>
+
+    </div>
+    
+    <!-- JAVASCRIPT ABAIXO -->
+    <script>
+
+        // PEGAR MES PELO URL
+        const mes = location.search.replace("?", "");
+        
+        // PEGAR TODOS OS CIRCOS
+        const circos = document.querySelectorAll(".circle");
+        
+        // CLASS DO TEXTO QUE ESTÁ CENTRALIZADO NO MEIO DOS CIRCOS
+        const classTexto = "text-center";
+
+        // CONFIGURAR QUAL ORDEM DE ELEMENTO DEVE RECEBER UMA DETERMINADA COR
+        // bgCor é o valor da cor de fundo do circo, em quanto txtCor é a cor do texto que está centralizado no meio do circo.
+        // Para adicionar mais circos basta copiar a ultima linha e adicionar abaixo da mesma apenas mudando a ordem para 6 como exemplo
+        const configuracaoDeCores = {
+            janeiro: {
+                1: {bgCor: "red", txtCor: "black"},
+                2: {bgCor: "blue", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            fevereiro: {
+                1: {bgCor: "green", txtCor: "pink"},
+                2: {bgCor: "red", txtCor: "green"},
+                3: {bgCor: "pink", txtCor: "blue"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            marco: {
+                1: {bgCor: "yellow", txtCor: "black"},
+                2: {bgCor: "red", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "blue", txtCor: "white"},
+                5: {bgCor: "green", txtCor: "blue"},
+            },
+            abril: {
+                1: {bgCor: "green", txtCor: "black"},
+                2: {bgCor: "pink", txtCor: "white"},
+                3: {bgCor: "blue", txtCor: "black"},
+                4: {bgCor: "red", txtCor: "blue"},
+                5: {bgCor: "yellow", txtCor: "blue"},
+            },
+            maio: {
+                1: {bgCor: "green", txtCor: "pink"},
+                2: {bgCor: "red", txtCor: "green"},
+                3: {bgCor: "pink", txtCor: "blue"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            junho: {
+                1: {bgCor: "yellow", txtCor: "black"},
+                2: {bgCor: "red", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "blue", txtCor: "white"},
+                5: {bgCor: "green", txtCor: "blue"},
+            },
+            julho: {
+                1: {bgCor: "green", txtCor: "pink"},
+                2: {bgCor: "red", txtCor: "green"},
+                3: {bgCor: "pink", txtCor: "blue"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            agosto: {
+                1: {bgCor: "red", txtCor: "black"},
+                2: {bgCor: "blue", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            setembro: {
+                1: {bgCor: "green", txtCor: "pink"},
+                2: {bgCor: "red", txtCor: "green"},
+                3: {bgCor: "pink", txtCor: "blue"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            outubro: {
+                1: {bgCor: "red", txtCor: "black"},
+                2: {bgCor: "blue", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            novembro: {
+                1: {bgCor: "green", txtCor: "pink"},
+                2: {bgCor: "red", txtCor: "green"},
+                3: {bgCor: "pink", txtCor: "blue"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            dezembro: {
+                1: {bgCor: "red", txtCor: "black"},
+                2: {bgCor: "blue", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+            dezembro: {
+                1: {bgCor: "red", txtCor: "black"},
+                2: {bgCor: "blue", txtCor: "white"},
+                3: {bgCor: "pink", txtCor: "black"},
+                4: {bgCor: "green", txtCor: "blue"},
+                5: {bgCor: "red", txtCor: "blue"},
+            },
+        }
+
+        // FUNÇÃO PARA ALTERAR A COR DOS CIRCOS
+        function mudarCor(mes) {
+
+            circos.forEach(circo => {
+
+                for(let name in configuracaoDeCores[mes]) {
+
+                    if(circo.dataset.ordem === name) {
+
+                        circo.style.fill = configuracaoDeCores[mes][name].bgCor;
+                        circo.querySelector(`.${classTexto}`).style.color = configuracaoDeCores[mes][name].txtCor;
+
+                    };
+
+                };
+
+            });
+
+        };
+
+
+        // CHAMAR A FUNÇÃO COM O MES
+        mudarCor(mes);
+
+    </script>
+
+</body>
+</html>
